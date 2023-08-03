@@ -1,9 +1,17 @@
-import { useAppDispatch } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { Inner } from "./Subscriber"
-import { incrementGoodbye, incrementHello } from "./valuemapSlice"
+import {
+  getFooBar,
+  incrementGoodbye,
+  incrementHello,
+  sayGoodbye,
+  sayHello,
+} from "./valuemapSlice"
 
 export const ValueMap = () => {
   const dispatch = useAppDispatch()
+
+  const bar = useAppSelector(getFooBar)
 
   return (
     <div>
@@ -13,8 +21,11 @@ export const ValueMap = () => {
       <button onClick={() => dispatch(incrementGoodbye())}>
         Increment Goodbye
       </button>
+      <button onClick={() => dispatch(sayHello())}>Say Hello</button>
+      <button onClick={() => dispatch(sayGoodbye())}>Say Goodbye</button>
       <Inner id="hello" />
       <Inner id="goodbye" />
+      <div>{bar}</div>
     </div>
   )
 }
